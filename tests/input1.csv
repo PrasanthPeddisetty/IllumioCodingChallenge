@@ -1,0 +1,1 @@
+nbound,tcp,0,0.0.0.0,,,inbound,tcp,65535,255.255.255.255,,,outbound,tcp,0,0.0.0.0,,,outbound,tcp,65535,255.255.255.255,,,inbound,udp,0,0.0.0.0,,,inbound,udp,65535,255.255.255.255,,,outbound,udp,0,0.0.0.0,,,outbound,udp,65535,255.255.255.255
