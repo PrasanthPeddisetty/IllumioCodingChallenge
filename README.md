@@ -20,18 +20,21 @@ Test all the cases in the tests/ and show whether each case passed the test case
 inbound,tcp,80,192.168.10.11,True
 outbound,udp,22,192.168.50.1,False
 inbound,tcp,23,172.27.1.1,True
-inbound,tdp,443,172.27.1.2,False
+inbound,tcp,443,172.27.1.2,False
 
 Performance
 
 The implementation takes O(log(n)) to add or delete entries. Also, it reduces the number of entries to compare with when accept_packet function is called. However, it still takes O(n) to query whether it accepts or not. Due to the 90 minutes time constraint, I was not able to reduce the query time to O(log(n)). Please see future optimization section for the detail of possible design.
+
 Observation
 Test
 
-Made sure a function works correctly for all the edge cases. First, since IP ranges from 0.0.0.0 to 255.255.255.255 and Port ranges from 0 to 65535, it tests the corner of each range works fine (fw1.csv and test1.csv). Second, it takes cases when duplicate IP ranges or Port ranges have different rules work fine (fw2.csv and test2.csv).
+Made sure a function works correctly for all the edge cases. First, since IP ranges from 0.0.0.0 to 255.255.255.255 and Port ranges from 0 to 65535, it tests the corner of each range works fine (input1.csv and test1.csv). Second, it takes cases when duplicate IP ranges or Port ranges have different rules work fine (input2.csv and test2.csv).
+
 Design
 
 Table consists of array of tuples consists of 4 elements; (<IP range start>, <Port range start>, <IP range end>, <Port range end>). By using this format, it can binary search the index where a new entry have to be inserted or an existing entry have to be deleted. To reduce the range to query, it finds the point where it have to start query from by using Binary Search (bisect).
+
 Future Optimization
 
 Even though adding or deleting the entry takes always O(log(n)), judging whether to accept a packet or not takes O(n) in the worst case since it is checking each entry one by one from the index obtained by binary search. The possible optimizations are shown below.
